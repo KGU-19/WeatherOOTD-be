@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @RequiredArgsConstructor
 public class MemberRepository {
     private static final ConcurrentHashMap<Long, Member> store = new ConcurrentHashMap<>();
-    private static AtomicLong sequence = new AtomicLong(0);
+    private static AtomicLong sequence = new AtomicLong(1);
 
 
     public Member save(Member member){
@@ -22,12 +22,12 @@ public class MemberRepository {
         return member;
     }
 
-    public Member findById(Long id){
-        Member member = store.get(id);
+    public Member findById(Long memberId){
+        Member member = store.get(memberId);
         if(member != null){
             return member;
         }
-        throw new IllegalArgumentException("존재하지 않는 id");
+        throw new IllegalArgumentException("존재하지 않는 ID");
     }
 
     public List<Member> findAll(){
