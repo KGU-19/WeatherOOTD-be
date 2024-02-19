@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -27,7 +28,15 @@ public class MemberRepository {
         if(member != null){
             return member;
         }
-        throw new IllegalArgumentException("존재하지 않는 ID");
+        return null;
+    }
+
+    public Member findByName(String memberName){
+        for (Member member : store.values()) {
+            if(Objects.equals(memberName, member.getName()))
+                return member;
+        }
+        return null;
     }
 
     public List<Member> findAll(){
@@ -40,6 +49,10 @@ public class MemberRepository {
         findMember.setAge(inputParam.getAge());
         findMember.setSex(inputParam.getSex());
         findMember.setStyle(inputParam.getStyle());
+    }
+
+    public void delete(Long memberId){
+        store.remove(memberId);
     }
 
     public void clearStore(){
