@@ -15,7 +15,7 @@ public class MemberService {
      * @param member
      * @return
      */
-    public Long join(Member member){
+    public String join(Member member){
         validateDuplicate(member);
 
         memberRepository.save(member);
@@ -41,7 +41,7 @@ public class MemberService {
      * @param memberId
      * @return
      */
-    public Member findMemberById(Long memberId) {
+    public Member findMemberById(String memberId) {
         Member member = memberRepository.findById(memberId);
         if(member == null){
             throw new IllegalArgumentException("해당 ID의 멤버를 찾을 수 없음");
@@ -68,7 +68,7 @@ public class MemberService {
      * @param memberId
      * @param inputMember
      */
-    public void updateMember(Long memberId, Member inputMember){
+    public void updateMember(String memberId, Member inputMember){
         Member member = findMemberById(memberId);
         memberRepository.update(memberId, inputMember);
     }
@@ -77,7 +77,7 @@ public class MemberService {
      * 멤버 삭제
      * @param memberId
      */
-    public void deleteMember(Long memberId){
+    public void deleteMember(String memberId){
         Member memberById = findMemberById(memberId);
         memberRepository.delete(memberId);
     }
