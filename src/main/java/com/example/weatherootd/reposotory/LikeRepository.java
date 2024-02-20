@@ -35,24 +35,28 @@ public class LikeRepository {
         return new ArrayList<>(store.values());
     }
 
-    public List<Like> findAllByMember(Member member){
-        List<Like> likeList = findAll();
+    public List<Ootd> findOotdByMember(Member member){
+        ArrayList<Ootd> ootdArrayList = new ArrayList<>();
+
         for (Like like : store.values()) {
             if(member.equals(like.getMember())){
-                likeList.add(like);
+                ootdArrayList.add(like.getOotd());
             }
         }
-        return likeList;
+
+        return ootdArrayList;
     }
 
-    public List<Like> findAllByOotd(Ootd ootd){
-        List<Like> likeList = findAll();
+    public Like findMemberAndOotd(Member member, Ootd ootd){
         for (Like like : store.values()) {
-            if(ootd.equals(like.getOotd())){
-                likeList.add(like);
+            if(member.equals(like.getMember()) && ootd.equals(like.getOotd())){
+                return like;
             }
         }
-        return likeList;
+        throw new IllegalArgumentException("해당 like를 찾을 수 없음");
+    }
 
+    public void delete(Like like){
+        store.remove(like.getId());
     }
 }

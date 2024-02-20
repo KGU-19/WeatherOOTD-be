@@ -3,12 +3,14 @@ package com.example.weatherootd.service;
 import com.example.weatherootd.domain.Member;
 import com.example.weatherootd.reposotory.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 @RequiredArgsConstructor
 public class MemberService {
-    private final MemberRepository memberRepository = new MemberRepository();
+    private final MemberRepository memberRepository;
 
     /**
      * 회원가입

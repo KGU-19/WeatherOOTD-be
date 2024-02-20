@@ -97,4 +97,7 @@ public class OotdRepository {
     }
 
 
+    public void delete(Ootd ootd) {
+        store.remove(findById(ootd.getId()));
+    }
 }
